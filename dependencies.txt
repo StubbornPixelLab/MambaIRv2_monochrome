@@ -1,0 +1,40 @@
+Ubuntu 20.04
+CUDA 12.8
+Python 3.10
+PyTorch 2.9.0 + cu128
+
+
+
+1.创建 image
+docker build -t ubuntu2204-cu128 .  （ubuntu2204-cu128镜像名字）
+
+
+2. 创建container
+
+docker run --gpus all -it \
+  --name jx  \
+  --ipc=host  \
+  -v /home/yinqiang/jixiang:/home/yinqiang/jixiang \
+  -v /media/zhongyi/D:/media/zhongyi/D \
+  -v /media/zhongyi/E:/media/zhongyi/E \
+  ubuntu2204-cu128
+
+
+3.进入container后，安装项目依赖
+
+pip install torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0 --index-url https://download.pytorch.org/whl/cu128
+
+pip install opencv-python tqdm tensorboard lpips
+
+
+pip install causal-conv1d --no-build-isolation
+
+pip install mamba-ssm --no-build-isolation
+
+
+
+
+
+mambairv2  8张v100   batch 16  128crop
+
+   
